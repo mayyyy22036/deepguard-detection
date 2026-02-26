@@ -1,0 +1,55 @@
+# Deep Learning Frameworks
+torch==2.1.0
+torchvision==0.16.0
+timm==0.9.12
+
+# Computer Vision
+opencv-python==4.8.1.78
+Pillow==10.1.0
+albumentations==1.3.1
+facenet-pytorch==2.5.3
+
+# MLOps
+mlflow==2.9.2
+fastapi==0.108.0
+uvicorn[standard]==0.25.0
+pydantic==2.5.3
+python-multipart==0.0.6
+
+# Interface
+streamlit==1.29.0
+gradio==4.12.0
+
+# Data Science
+numpy==1.26.2
+pandas==2.1.4
+scikit-learn==1.3.2
+scipy==1.11.4
+matplotlib==3.8.2
+seaborn==0.13.0
+
+# Explicability
+grad-cam==1.4.8
+captum==0.7.0
+
+# Utils
+tqdm==4.66.1
+PyYAML==6.0.1
+python-dotenv==1.0.0
+requests==2.31.0
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Jupyter
+jupyter==1.0.0
+ipykernel==6.27.1
+ipywidgets==8.1.1
+
+# Video Processing
+imageio==2.33.1
+imageio-ffmpeg==0.4.9
+
+# Containerization
+gunicorn==21.2.0

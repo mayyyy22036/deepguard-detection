@@ -1,0 +1,194 @@
+# DeepGuard - Configuration File
+
+# Project Info
+project:
+  name: "deepguard"
+  version: "1.0.0"
+  description: "Deepfake Detection System"
+
+# Data
+data:
+  dataset_path: "data/faceforensics"
+  compression: "c23"  # c23 (low) or c40 (high)
+  splits:
+    train: 0.7
+    val: 0.15
+    test: 0.15
+  
+  # Face extraction
+  face_detection:
+    method: "retinaface"  # retinaface or mtcnn
+    margin: 0.2
+    min_confidence: 0.9
+  
+  # Frame extraction
+  frames_per_video: 32
+  frame_size: [224, 224]  # [height, width]
+  
+  # Data augmentation
+  augmentation:
+    train:
+      - RandomHorizontalFlip
+      - RandomRotation: {degrees: 15}
+      - ColorJitter: {brightness: 0.2, contrast: 0.2, saturation: 0.2}
+      - GaussianBlur: {kernel_size: 5}
+    val:
+      - CenterCrop
+    test:
+      - CenterCrop
+
+# Model
+model:
+  architecture: "efficientnet_b4"  # efficientnet_b4, xception, vit_base
+  num_classes: 2  # 2 (binary) or 5 (multi-class with original)
+  pretrained: true
+  dropout: 0.3
+  
+  # Model-specific params
+  efficientnet:
+    version: "b4"
+    feature_dim: 1792
+  
+  xception:
+    depth_multiplier: 1.0
+  
+  vit:
+    patch_size: 16
+    embed_dim: 768
+    depth: 12
+    num_heads: 12
+
+# Training
+training:
+  batch_size: 32
+  num_epochs: 50
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  
+  # Optimizer
+  optimizer: "adam"  # adam, adamw, sgd
+  optimizer_params:
+    betas: [0.9, 0.999]
+    eps: 1e-8
+  
+  # Scheduler
+  scheduler: "cosine"  # cosine, step, plateau
+  scheduler_params:
+    T_max: 50
+    eta_min: 1e-6
+  
+  # Loss
+  loss_function: "cross_entropy"  # cross_entropy, focal_loss
+  focal_loss_params:
+    alpha: 0.25
+    gamma: 2.0
+  
+  # Early stopping
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_delta: 0.001
+  
+  # Mixed precision
+  use_amp: true
+  
+  # Gradient clipping
+  grad_clip: 1.0
+
+# Evaluation
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+    - auc_roc
+    - confusion_matrix
+  
+  # Cross-dataset evaluation
+  cross_dataset:
+    enabled: true
+    datasets:
+      - celeb_df
+      - dfdc
+
+# Explainability
+explainability:
+  methods:
+    - gradcam
+    - gradcam_plusplus
+  target_layer: "layer4"  # Model-specific
+  
+  # Visualization
+  colormap: "jet"
+  alpha: 0.4
+
+# MLflow
+mlflow:
+  tracking_uri: "mlruns"
+  experiment_name: "deepguard_detection"
+  
+  # Logging
+  log_params: true
+  log_metrics: true
+  log_artifacts: true
+  log_models: true
+  
+  # Auto-logging
+  autolog:
+    enabled: true
+    log_every_n_iter: 10
+
+# API
+api:
+  host: "0.0.0.0"
+  port: 8000
+  reload: false
+  workers: 4
+  
+  # CORS
+  cors:
+    enabled: true
+    origins:
+      - "http://localhost:3000"
+      - "http://localhost:8501"
+  
+  # Rate limiting
+  rate_limit:
+    enabled: true
+    max_requests: 100
+    window_seconds: 60
+
+# Streamlit
+streamlit:
+  port: 8501
+  theme: "light"
+  max_upload_size: 200  # MB
+
+# Hardware
+hardware:
+  device: "cuda"  # cuda or cpu
+  num_workers: 4
+  pin_memory: true
+  
+  # Multi-GPU
+  use_ddp: false
+  gpu_ids: [0]
+
+# Paths
+paths:
+  data: "data"
+  models: "models"
+  logs: "logs"
+  checkpoints: "models/checkpoints"
+  mlruns: "mlruns"
+  cache: ".cache"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/training.log"
+
+# Random seed for reproducibility
+seed: 42
