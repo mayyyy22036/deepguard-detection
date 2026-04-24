@@ -1,4 +1,4 @@
-<img width="2600" height="1330" alt="gradcam_visualization" src="https://github.com/user-attachments/assets/10dd7779-50de-4808-816a-b3b7e8dadedf" /># 🛡️ DeepGuard — Système de Détection de Deepfakes par Deep Learning
+ 🛡️ DeepGuard — Système de Détection de Deepfakes par Deep Learning
 
 > **Module** : Deep Learning — Computer Vision & Modèles Génératifs  
 > **Encadrant** : Haythem Ghazouani  
