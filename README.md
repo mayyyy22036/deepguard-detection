@@ -209,8 +209,7 @@ Grad-CAM (Selvaraju et al., ICCV 2017) visualise les zones de l'image qui ont in
 ```
 
 ### Observations
-
-
+<img width="2600" height="1330" alt="gradcam_visualization" src="https://github.com/user-attachments/assets/9f4217c0-6aab-4f9a-850a-4691035e4d37" />
 
 - **Images REAL** : Les activations sont centrées sur les zones clés du visage (nez, bouche) avec une intensité modérée. Le modèle analyse des features globales sans détecter d’anomalies évidentes.
 - **Images FAKE** : Les activations sont plus intenses et concentrées sur les régions centrales du visage, notamment le nez et la bouche, suggérant que le modèle capte des incohérences subtiles dans ces zones (artefacts de génération ou de fusion).
