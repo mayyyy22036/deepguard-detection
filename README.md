@@ -1,4 +1,4 @@
-# 🛡️ DeepGuard — Système de Détection de Deepfakes par Deep Learning
+<img width="2600" height="1330" alt="gradcam_visualization" src="https://github.com/user-attachments/assets/10dd7779-50de-4808-816a-b3b7e8dadedf" /># 🛡️ DeepGuard — Système de Détection de Deepfakes par Deep Learning
 
 > **Module** : Deep Learning — Computer Vision & Modèles Génératifs  
 > **Encadrant** : Haythem Ghazouani  
@@ -210,8 +210,10 @@ Grad-CAM (Selvaraju et al., ICCV 2017) visualise les zones de l'image qui ont in
 
 ### Observations
 
-- **Images REAL** : activations diffuses, aucune zone particulièrement suspecte
-- **Images FAKE** : activations concentrées sur les contours du visage et les yeux — zones d'artefacts de fusion
+
+
+- **Images REAL** : Les activations sont centrées sur les zones clés du visage (nez, bouche) avec une intensité modérée. Le modèle analyse des features globales sans détecter d’anomalies évidentes.
+- **Images FAKE** : Les activations sont plus intenses et concentrées sur les régions centrales du visage, notamment le nez et la bouche, suggérant que le modèle capte des incohérences subtiles dans ces zones (artefacts de génération ou de fusion).
 
 ---
 
@@ -391,7 +393,7 @@ deepguard-detection/
 | Semaine | Objectif | Réalisé | Résultat clé |
 |---------|----------|---------|--------------|
 | 1 | Data Pipeline | ✅ MTCNN + split VIDEO ID | 3 200 faces extraites, data leakage corrigé |
-| 2 | Baseline | ✅ EfficientNet-B0 + MLflow | AUC = 0.95 (sur données propres) |
+| 2 | Baseline | ✅ EfficientNet-B0 + MLflow | AUC = 0.86 (sur données propres) |
 | 3 | Optimisation | ✅ Ablation study (6 configs) | Hyperparamètres baseline validés |
 | 4 | Explainabilité | ✅ Grad-CAM | Visualisations sur images REAL/FAKE |
 | 5 | Déploiement | ✅ FastAPI + React + Docker | Endpoint /predict fonctionnel |
